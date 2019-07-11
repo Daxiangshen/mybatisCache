@@ -121,4 +121,17 @@ public class RedisCache implements Cache {
         return readWriteLock;
     }
 
+
+
+
+    /**
+     * 笔记：
+     *
+     * 这里不能通过autowire的方式引用redisTemplate，因为RedisCache并不是Spring容器里的bean。所以我们需要手动地去调用容器的getBean方法来拿到这个bean
+     * 参考utils里的SpringContextHolder类
+     *
+     * @SuppressWarnings("unchecked")是忽略警告的注解
+     *
+     * 我们采用的redis序列化方式是默认的jdk序列化。所以数据库的查询对象（比如Product类）需要实现Serializable接口
+     * */
 }
