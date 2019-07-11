@@ -1,8 +1,10 @@
 package com.mybatiscache.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.mybatiscache.pojo.Product;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * ProductMapper interface
@@ -12,4 +14,23 @@ import com.mybatiscache.pojo.Product;
  * */
 public interface ProductMapper extends BaseMapper<Product> {
 
+    /**
+     * 查询所有信息
+     *
+     * @param id
+     *
+     * @return List<Product>
+     * */
+    List<Product> queryAll(@Param("id") Long id);
+
+    /**
+     * 修改信息
+     *
+     *
+     * @param product
+     *
+     *
+     * @return int
+     * */
+    int updateMsg(Product product);
 }

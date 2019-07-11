@@ -20,8 +20,17 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductMapper productMapper;
 
+
     @Override
-    public List<Product> selectProduct() {
-        return productMapper.selectList(null);
+    public List<Product> queryAll(Long id) {
+        return productMapper.queryAll(id);
+    }
+
+    @Override
+    public boolean updateMsg(Product product) {
+        if (productMapper.updateMsg(product)<1){
+            return false;
+        }
+        return true;
     }
 }

@@ -1,4 +1,4 @@
-package com.mybatiscache.redisCache;
+package com.mybatiscache.rediscache;
 
 import com.mybatiscache.utils.SpringContextHolder;
 import org.apache.ibatis.cache.Cache;
