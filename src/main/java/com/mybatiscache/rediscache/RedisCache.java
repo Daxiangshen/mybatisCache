@@ -30,7 +30,7 @@ public class RedisCache implements Cache {
     private final String id;
 
 
-    private RedisTemplate redisTemplate=SpringContextHolder.getBean("redisTemplate");
+    private RedisTemplate redisTemplate;
 
     /**
      * redis过期时间
@@ -61,9 +61,10 @@ public class RedisCache implements Cache {
     @Override
     @SuppressWarnings("unchecked")
     public void putObject(Object key, Object value) {
+        RedisTemplate redisTemplate = getRedisTemplate();
         ValueOperations opsForValue = redisTemplate.opsForValue();
         opsForValue.set(key, value, EXPIRE_TIME_IN_MINUTES, TimeUnit.MINUTES);
-        logger.debug("Put query result to redis");
+        logger.info("Put query result to redis");
     }
 
     /**
@@ -74,8 +75,9 @@ public class RedisCache implements Cache {
      */
     @Override
     public Object getObject(Object key) {
+        RedisTemplate redisTemplate = getRedisTemplate();
         ValueOperations opsForValue = redisTemplate.opsForValue();
-        logger.debug("Get cached query result from redis");
+        logger.info("Get cached query result from redis");
         return opsForValue.get(key);
     }
 
@@ -88,8 +90,9 @@ public class RedisCache implements Cache {
     @Override
     @SuppressWarnings("unchecked")
     public Object removeObject(Object key) {
+        RedisTemplate redisTemplate = getRedisTemplate();
         redisTemplate.delete(key);
-        logger.debug("Remove cached query result from redis");
+        logger.info("Remove cached query result from redis");
         return null;
     }
 
@@ -98,11 +101,12 @@ public class RedisCache implements Cache {
      * */
     @Override
     public void clear() {
+        RedisTemplate redisTemplate = getRedisTemplate();
         redisTemplate.execute((RedisCallback) connection -> {
             connection.flushDb();
             return null;
         });
-        logger.debug("Clear all the cached query result from redis");
+        logger.info("Clear all the cached query result from redis");
     }
 
     /**
@@ -119,6 +123,13 @@ public class RedisCache implements Cache {
     @Override
     public ReadWriteLock getReadWriteLock() {
         return readWriteLock;
+    }
+
+    private RedisTemplate getRedisTemplate() {
+        if (redisTemplate == null) {
+            redisTemplate = SpringContextHolder.getBean("redisTemplate");
+        }
+        return redisTemplate;
     }
 
 

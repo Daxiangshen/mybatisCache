@@ -1,6 +1,5 @@
 package com.mybatiscache.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mybatiscache.pojo.Product;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,7 +11,7 @@ import java.util.List;
  * @author yuxiang
  * @since 2019/7/10
  * */
-public interface ProductMapper extends BaseMapper<Product> {
+public interface ProductMapper{
 
     /**
      * 查询所有信息
@@ -32,5 +31,5 @@ public interface ProductMapper extends BaseMapper<Product> {
      *
      * @return int
      * */
-    int updateMsg(Product product);
+    int updateMsg(@Param("product") Product product);
 }

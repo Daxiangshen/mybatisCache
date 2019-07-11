@@ -1,6 +1,5 @@
 package com.mybatiscache.pojo;
 
-import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -11,7 +10,7 @@ import java.io.Serializable;
  * @since 2019/7/10
  * */
 @Data
-public class Product extends Model<Product> implements Serializable{
+public class Product implements Serializable{
 
     private static final long serialVersionUID = -7805392930118153776L;
 

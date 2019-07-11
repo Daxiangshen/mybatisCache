@@ -10,18 +10,16 @@
         <result column="price" property="price"/>
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id , name , price
-    </sql>
-
-
-
     <select id="queryAll" resultType="com.mybatiscache.pojo.Product">
-        select * from product where id=#{id} limit 1
+        select * from product
+        where id=#{id}
+        limit 1
     </select>
 
     <update id="updateMsg" parameterType="com.mybatiscache.pojo.Product" flushCache="true">
-        update product set name=#{produce.name},price=#{product.price} where id=#{product.id} limit 1
+        update product
+        set name=#{product.name},price=#{product.price}
+        where id=#{product.id}
+        limit 1
     </update>
 </mapper>
