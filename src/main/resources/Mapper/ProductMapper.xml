@@ -23,3 +23,5 @@
         limit 1
     </update>
 </mapper>
+<!--如果我们在启用了二级缓存后，有某个查询语句是我们不想缓存的，则可以通过指定其useCache为false来达到对应的效果。
+如果我们不想该语句缓存，可使用useCache="false"-->
